@@ -19,7 +19,7 @@ public class Consumer {
             properties.load(props);
             consumer = new KafkaConsumer<>(properties);
         }
-        consumer.subscribe(Arrays.asList("user-events", "global-events"));
+        consumer.subscribe(Arrays.asList("user-events", "global-events", "ack-event"));
 
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
@@ -31,6 +31,9 @@ public class Consumer {
                         break;
                     case "global-events":
                         System.out.println("Received global-events message - value: " + record.value());
+                        break;
+                    case "ack-event":
+                        System.out.println("Received ack-event message - value: " + record.value());
                         break;
                     default:
                         throw new IllegalStateException("Shouldn't be possible to get message on topic " + record.topic());
