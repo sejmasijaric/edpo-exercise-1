@@ -21,7 +21,7 @@ public class Producer {
         }
 
         try {
-            for (int i = 0; i < 100000; i++) {
+            for (int i = 0; i < 5000; i++) {
                 producer.send(new ProducerRecord<String, String>(
                         "user-events", // topic
                         "user_id_" + i, // key
